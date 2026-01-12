@@ -30,6 +30,7 @@ import os
 from dotenv import load_dotenv
 from loguru import logger
 from PIL import Image
+from aiortc import RTCIceServer
 from pipecat.audio.turn.smart_turn.local_smart_turn_v3 import LocalSmartTurnAnalyzerV3
 from pipecat.audio.vad.silero import SileroVADAnalyzer
 from pipecat.audio.vad.vad_analyzer import VADParams
@@ -216,7 +217,16 @@ async def bot(runner_args: RunnerArguments):
             )
         case SmallWebRTCRunnerArguments():
             webrtc_connection: SmallWebRTCConnection = runner_args.webrtc_connection
+            
+            webrtc_connection.ice_servers = [
+                RTCIceServer(urls="stun:stun.l.google.com:19302"),
+                RTCIceServer(urls="stun:stun1.l.google.com:19302"),
+                RTCIceServer(urls="stun:stun2.l.google.com:19302"),
+            ]
 
+            print(f"webrtc_connection ice_servers set with {len(webrtc_connection.ice_servers)} servers")
+            
+            
             transport = SmallWebRTCTransport(
                 webrtc_connection=webrtc_connection,
                 params=TransportParams(
