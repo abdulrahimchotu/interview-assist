@@ -6,6 +6,7 @@ async function handleRequest(
 ) {
   const botBaseUrl =
     process.env.BOT_START_URL?.replace("/start", "") || "http://localhost:7860";
+  console.log("botBaseUrl", botBaseUrl);
   const { sessionId, path } = await params;
   const pathString = path.join("/");
   const targetUrl = `${botBaseUrl}/sessions/${sessionId}/${pathString}`;
