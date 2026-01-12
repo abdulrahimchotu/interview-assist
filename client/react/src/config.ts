@@ -9,7 +9,7 @@ export type TransportType = "daily" | "smallwebrtc";
 
 export const AVAILABLE_TRANSPORTS: TransportType[] = ["daily", "smallwebrtc"];
 
-export const DEFAULT_TRANSPORT: TransportType = "daily";
+export const DEFAULT_TRANSPORT: TransportType = "smallwebrtc";
 
 export const TRANSPORT_LABELS: Record<TransportType, string> = {
   daily: "Daily",
@@ -29,7 +29,7 @@ export const TRANSPORT_CONFIG: Record<TransportType, APIRequest> = {
     endpoint: "/api/start",
     requestData: {
       createDailyRoom: false,
-      enableDefaultIceServers: true,
+      enableDefaultIceServers: false,
       transport: "webrtc",
     },
   },

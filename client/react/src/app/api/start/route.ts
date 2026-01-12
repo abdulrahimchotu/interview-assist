@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
   const botStartUrl =
     process.env.BOT_START_URL || "http://localhost:7860/start";
+  console.log("BOT_START_URL", botStartUrl);
 
   if (!process.env.BOT_START_URL) {
     console.warn(
