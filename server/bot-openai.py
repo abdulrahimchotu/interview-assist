@@ -215,19 +215,7 @@ async def bot(runner_args: RunnerArguments):
                 ),
             )
         case SmallWebRTCRunnerArguments():
-            webrtc_connection = runner_args.webrtc_connection
-            from aiortc import RTCIceServer
-            
-            servers = [
-                RTCIceServer(urls="stun:stun.l.google.com:19302"),
-                RTCIceServer(urls="stun:stun1.l.google.com:19302"),
-                RTCIceServer(urls="stun:stun2.l.google.com:19302"),
-            ]
-            webrtc_connection.ice_servers = servers
-            webrtc_connection._initialize()
-
-            print(f"webrtc_connection ice_servers set with {len(webrtc_connection.ice_servers)} servers")
-            
+            webrtc_connection: SmallWebRTCConnection = runner_args.webrtc_connection
             
             transport = SmallWebRTCTransport(
                 webrtc_connection=webrtc_connection,
